@@ -1,0 +1,357 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API documentation",
+        "contact": {
+            "email": "igor-skromnik@yande.ru"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api",
+            "description": "Laravel Swagger API server"
+        }
+    ],
+    "paths": {
+        "/freerest/callRestApi": {
+            "get": {
+                "tags": [
+                    "FreeRestApi"
+                ],
+                "summary": "call some REST API by url",
+                "description": "Get multiply numbers result of soap calculator.",
+                "operationId": "callSomeRestApi",
+                "parameters": [
+                    {
+                        "name": "method",
+                        "in": "path",
+                        "description": "Название метода HTTP",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "GET"
+                    },
+                    {
+                        "name": "url",
+                        "in": "path",
+                        "description": "API rul",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "example.com/users"
+                    },
+                    {
+                        "name": "data",
+                        "in": "path",
+                        "description": "data для запроса к API",
+                        "required": false,
+                        "schema": {
+                            "type": "object|array"
+                        },
+                        "example": "{user_id: 23}"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/freerest/getUsersFromApi": {
+            "get": {
+                "tags": [
+                    "FreeRestApi"
+                ],
+                "summary": "Get users from free rest api",
+                "description": "Get users from free rest api.",
+                "operationId": "getUsersFromApi",
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": "[{\n                                            'id': 4694,\n                                            'name': 'Bilva Devar',\n                                            'email': 'devar_bilva@king.org',\n                                            'gender': 'male',\n                                            'status': 'inactive'\n                                        }]"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/soapclient/getMethods": {
+            "get": {
+                "tags": [
+                    "SoapCalculator"
+                ],
+                "summary": "Get methods of Calculator SOAP API ",
+                "description": "Get methods of soap calculator.",
+                "operationId": "getCalculatorMethods",
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/soapclient/getTypes": {
+            "get": {
+                "tags": [
+                    "SoapCalculator"
+                ],
+                "summary": "Get types of Calculator SOAP API ",
+                "description": "Get types of soap calculator.",
+                "operationId": "getCalculatorTypes",
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/soapclient/multiply": {
+            "get": {
+                "tags": [
+                    "SoapCalculator"
+                ],
+                "summary": "Use multiply method of SOAP API ",
+                "description": "Get multiply numbers result of soap calculator.",
+                "operationId": "callMultiplyMethod",
+                "parameters": [
+                    {
+                        "name": "intA",
+                        "in": "query",
+                        "description": "Множитель А",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "2"
+                    },
+                    {
+                        "name": "intB",
+                        "in": "query",
+                        "description": "Множитель B",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "2"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": "{'MultiplyResult': 4}"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/soapclient/divide": {
+            "get": {
+                "tags": [
+                    "SoapCalculator"
+                ],
+                "summary": "Use divide method of SOAP API ",
+                "description": "Get division result of soap calculator.",
+                "operationId": "callDivideMethod",
+                "parameters": [
+                    {
+                        "name": "intA",
+                        "in": "query",
+                        "description": "Делимое А",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "2"
+                    },
+                    {
+                        "name": "intB",
+                        "in": "query",
+                        "description": "Делитель B",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "2"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": "{'DivideResult': 1}"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/soapclient/sum": {
+            "get": {
+                "tags": [
+                    "SoapCalculator"
+                ],
+                "summary": "Use Sum method of SOAP API ",
+                "description": "Get sum result of soap calculator.",
+                "operationId": "callSumMethod",
+                "parameters": [
+                    {
+                        "name": "intA",
+                        "in": "query",
+                        "description": "Слагаемое А",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "2"
+                    },
+                    {
+                        "name": "intB",
+                        "in": "query",
+                        "description": "Слагаемое B",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "2"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": "{'AddResult': 4}"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/soapclient/subtract": {
+            "get": {
+                "tags": [
+                    "SoapCalculator"
+                ],
+                "summary": "Use Subtract method of SOAP API ",
+                "description": "Get subtract result of soap calculator.",
+                "operationId": "callSubstractMethod",
+                "parameters": [
+                    {
+                        "name": "intA",
+                        "in": "query",
+                        "description": "Уменьшаемое А",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "2"
+                    },
+                    {
+                        "name": "intB",
+                        "in": "query",
+                        "description": "Вычитаемое B",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "2"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": "{'SubtractResult': 0}"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "X-APP-ID": {
+                "type": "apiKey",
+                "name": "X-APP-ID",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "SoapCalculator",
+            "description": "Пример взаимодействия с SOAP server native php"
+        },
+        {
+            "name": "FreeRestApi",
+            "description": "Пример взаимодействия с Rest api native php"
+        }
+    ]
+}
