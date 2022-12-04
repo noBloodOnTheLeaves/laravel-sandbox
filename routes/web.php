@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\ClientContractInfo;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,16 +24,27 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->middleware(['auth', 'verified']);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+Route::get('/', function () {
+    return Inertia::render('Dashboard',['roles' => \Illuminate\Support\Facades\Auth::user()->getRoleNames()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/client-contract',ClientContractInfo::class);
+
+    Route::get('/get-contract-emails', function () {
+        return Inertia::render('ContractEmail');
+    });
+
+    Route::get('/users', function () {
+        return Inertia::render('ContractEmail');
+    });
 });
 
 require __DIR__.'/auth.php';

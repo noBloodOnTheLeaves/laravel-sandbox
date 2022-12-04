@@ -1,14 +1,16 @@
-import './bootstrap';
+//import './bootstrap';
 import '../css/app.css';
 import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import ReactDOMServer from "react-dom/server";
+//import ReactDOMServer from "react-dom/server";
 import {createInertiaApp} from "@inertiajs/inertia-react";
-import {createRoot} from "react-dom";
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+//import {createRoot} from "react-dom";
+import {createRoot} from "react-dom/client";
+import {Container, CssBaseline, ThemeProvider} from "@mui/material";
+import {theme} from './theme';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Larasand';
 
 createInertiaApp({
-    render: ReactDOMServer.renderToString,
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
     /*setup: ({ App, props }) => {
@@ -19,7 +21,15 @@ createInertiaApp({
         return <App {...props} />;
     },*/
     setup({ el, App, props }) {
-        createRoot(<App {...props} />, el)
+        createRoot(document.getElementById("root")).render(
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                    <Container maxWidth="lg">
+                        <App {...props} />
+                    </Container>
+            </ThemeProvider>
+            ,
+            el);
     },
 })
 
